@@ -17,13 +17,13 @@ const theme = createTheme({
   },
   palette: {
     primary: {
-      main: "#CCCC99",
+      main: "#1C2833",
     },
     secondary: {
-      main: "#CC8685",
+      main: "#34495E",
     },
     third: {
-      main: "#CC8685",
+      main: "#CACFD2",
     },
   },
   components: {
