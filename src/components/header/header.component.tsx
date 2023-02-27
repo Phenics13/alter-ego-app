@@ -75,15 +75,15 @@ const Header = () => {
               </IconButton>
             </Box>
 
-            {/* logo button mobile */}
+            {/* mobile home nav */}
             <Box
               onClick={handleMenuClick("")}
+              color="white"
               sx={{
                 display: { xs: "flex", sm: "none" },
                 alignItems: "center",
                 flexGrow: 1,
                 justifyContent: "center",
-                color: "white",
                 cursor: "pointer",
               }}
             >
@@ -101,11 +101,11 @@ const Header = () => {
             {/* desktop home nav */}
             <Box
               onClick={handleMenuClick("")}
+              color="white"
               sx={{
                 display: { xs: "none", sm: "flex" },
                 alignItems: "center",
                 justifyContent: "center",
-                color: "white",
                 cursor: "pointer",
               }}
             >

@@ -5,7 +5,16 @@ import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import "./index.css";
 
+declare module "@mui/material/styles" {
+  interface PaletteOptions {
+    third: PaletteOptions["primary"];
+  }
+}
+
 const theme = createTheme({
+  typography: {
+    fontFamily: "Poppins, Roboto, sans-serif",
+  },
   palette: {
     primary: {
       main: "#CCCC99",
@@ -13,8 +22,21 @@ const theme = createTheme({
     secondary: {
       main: "#CC8685",
     },
+    third: {
+      main: "#CC8685",
+    },
   },
   components: {
+    MuiTypography: {
+      variants: [
+        {
+          props: { variant: "body2" },
+          style: {
+            "font-family": "Lora, Roboto, sans-serif",
+          },
+        },
+      ],
+    },
     MuiButton: {
       styleOverrides: {
         root: {
