@@ -1,7 +1,11 @@
 import { ChangeEvent, FormEvent, useState } from "react";
+
 import { Box, Button, makeStyles, TextField, Typography } from "@mui/material";
 import styled from "@emotion/styled";
+
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setCurrentUser } from "../../store/user/user.action";
 
 const Form = styled("form")({
   display: "flex",
@@ -16,6 +20,7 @@ const initialFormFields = {
 
 const SignIn = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [formFields, setFormFields] = useState(initialFormFields);
   const [isValid, setIsValid] = useState(true);
 
@@ -25,7 +30,8 @@ const SignIn = () => {
   };
 
   const validateForm = () => {
-    if (formFields.username !== "admin" || formFields.password !== "12345") {
+    const {username, password} = formFields;
+    if (username !== "admin" || password !== "12345") {
       return false;
     } else {
       return true;
@@ -41,6 +47,10 @@ const SignIn = () => {
     } else {
       setIsValid(true);
     }
+    
+    const {username} = formFields;
+    dispatch(setCurrentUser({username}));
+
     setFormFields(initialFormFields);
     navigate("/profile");
   };

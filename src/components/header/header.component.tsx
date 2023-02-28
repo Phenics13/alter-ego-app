@@ -1,10 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { Box } from "@mui/material";
-
 import HeaderBar from "../header-bar/header-bar.component";
-import HeaderDrawer from "../header-drawer.component.tsx/header-drawer.component";
+import HeaderDrawer from "../header-drawer/header-drawer.component";
 
 const pages = ["home", "news"];
 

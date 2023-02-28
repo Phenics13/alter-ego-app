@@ -13,8 +13,8 @@ import {
 } from "@mui/material";
 
 import AssignmentIcon from "@mui/icons-material/Assignment";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import MenuIcon from "@mui/icons-material/Menu";
+import UserIcon from "../user-icon/user-icon.component";
 
 const HideOnScroll: FC<{ children: ReactElement }> = ({ children }) => {
   const trigger = useScrollTrigger();
@@ -37,8 +37,6 @@ const HeaderBar: FC<HeaderBarProps> = ({
   handleDrawerToggle,
   pages,
 }) => {
-  const user = null;
-
   return (
     <HideOnScroll>
       <AppBar component="nav">
@@ -110,25 +108,7 @@ const HeaderBar: FC<HeaderBarProps> = ({
             </Box>
 
             {/* user */}
-            <Box sx={{ flexGrow: 0 }}>
-              {user ? (
-                <IconButton
-                  onClick={handleMenuClick("profile")}
-                  sx={{ color: "white" }}
-                >
-                  <AccountCircleIcon />
-                </IconButton>
-              ) : (
-                <Button
-                  variant="contained"
-                  color="secondary"
-                  sx={{ borderRadius: 50 }}
-                  onClick={handleMenuClick("sign-in")}
-                >
-                  Sign In
-                </Button>
-              )}
-            </Box>
+            <UserIcon handleMenuClick={handleMenuClick} />
           </Toolbar>
         </Container>
       </AppBar>
