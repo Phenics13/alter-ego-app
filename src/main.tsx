@@ -1,4 +1,5 @@
 import { ThemeProvider, createTheme } from "@mui/material";
+import { CSSProperties } from "@mui/styled-engine";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
@@ -12,11 +13,40 @@ declare module "@mui/material/styles" {
   interface PaletteOptions {
     third: PaletteOptions["primary"];
   }
+  interface TypographyOptions {
+    title: CSSProperties;
+    news_title: CSSProperties;
+    news_body: CSSProperties;
+  }
+  interface TypographyVariantsOptions {
+    title?: React.CSSProperties;
+    news_title?: React.CSSProperties;
+    news_body?: React.CSSProperties;
+  }
+}
+
+declare module "@mui/material/Typography" {
+  interface TypographyPropsVariantOverrides {
+    news_title: true;
+    news_body: true;
+    title: true;
+  }
 }
 
 const theme = createTheme({
   typography: {
-    fontFamily: "Poppins, Roboto, sans-serif",
+    title: {
+      fontSize: "2.5rem",
+      fontFamily: "Lora, Roboto, sans-serif",
+    },
+    news_title: {
+      fontSize: "1.5rem",
+      fontFamily: "Lora, Roboto, sans-serif",
+    },
+    news_body: {
+      fontSize: "1rem",
+      fontFamily: "Lora, Roboto, sans-serif",
+    },
   },
   palette: {
     primary: {

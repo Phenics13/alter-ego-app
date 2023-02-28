@@ -1,4 +1,4 @@
-import { compose, applyMiddleware, Middleware } from "redux";
+import { Middleware } from "redux";
 import { configureStore } from "@reduxjs/toolkit";
 
 import logger from "redux-logger";
@@ -9,12 +9,13 @@ import { rootReducer } from "./root-reducer";
 
 import storage from "redux-persist/lib/storage";
 import { PersistConfig, persistReducer, persistStore } from "redux-persist";
+import { rootSaga } from "./root-saga";
 
 export type RootState = ReturnType<typeof rootReducer>;
 
 type ExtendedPersistConfig = PersistConfig<RootState> & {
   whitelist: (keyof RootState)[];
-}
+};
 
 const persistConfig: ExtendedPersistConfig = {
   key: "root",
@@ -36,6 +37,6 @@ export const store = configureStore({
   middleware: middleWares,
 });
 
-// sagaMiddleware.run(rootSaga);
+sagaMiddleware.run(rootSaga);
 
 export const persistor = persistStore(store);
