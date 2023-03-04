@@ -11,3 +11,7 @@ export type News = {
   title: string;
   body: string;
 };
+
+export type NewsMap = {
+  [key: number]: News;
+};

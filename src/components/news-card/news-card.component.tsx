@@ -1,24 +1,46 @@
-import { Button, Paper, Typography } from "@mui/material";
-import { FC } from "react";
+import { Alert, Box, Button, Paper, Snackbar, Typography } from "@mui/material";
+import { FC, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteNewsItem } from "../../store/news/news.action";
+import { useNavigate } from "react-router-dom";
+import { deleteNewsItem, fetchNewsStart } from "../../store/news/news.action";
 import { selectNews } from "../../store/news/news.selector";
 import { News } from "../../store/news/news.types";
 
 type NewsCardProps = {
   newsItem: News;
-  setLimit: React.Dispatch<React.SetStateAction<number>>;
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const NewsCard: FC<NewsCardProps> = ({ newsItem, setLimit }) => {
-  const { title, body } = newsItem;
+const NewsCard: FC<NewsCardProps> = ({ newsItem, setOpen }) => {
+  const navigate = useNavigate();
+  const { id, title, body } = newsItem;
 
   const dispatch = useDispatch();
   const news = useSelector(selectNews);
 
   const handleDelete = () => {
-    dispatch(deleteNewsItem(news, newsItem));
-    setLimit((prevLimit: number) => prevLimit - 1);
+    try {
+      fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
+        method: "DELETE",
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Error while deleting news item");
+          }
+          return response.json();
+        })
+        .then((data) => {
+          dispatch(deleteNewsItem(news, newsItem));
+          setOpen(true);
+          console.log("open");
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleDetails = () => {
+    navigate(`${id}`);
   };
 
   return (
@@ -48,9 +70,14 @@ const NewsCard: FC<NewsCardProps> = ({ newsItem, setLimit }) => {
       >
         {body}
       </Typography>
-      <Button variant="contained" onClick={handleDelete} sx={{ ml: "auto" }}>
-        Delete
-      </Button>
+      <Box display="flex" justifyContent="space-between">
+        <Button color="info" variant="contained" onClick={handleDetails}>
+          Read more
+        </Button>
+        <Button variant="contained" onClick={handleDelete}>
+          Delete
+        </Button>
+      </Box>
     </Paper>
   );
 };

@@ -1,51 +1,27 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
-import { Box, Button, Paper, Typography } from "@mui/material";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { fetchNewsStart } from "../../store/news/news.action";
 
-import { useSelector } from "react-redux";
-import { selectNews } from "../../store/news/news.selector";
-import NewsCard from "../../components/news-card/news-card.component";
+import { Route, Routes } from "react-router-dom";
+import NewsPreview from "../../components/news-preview/news-preview.component";
+import Article from "../article/article.component";
+import { selectNewsNext } from "../../store/news/news.selector";
 
 const News = () => {
   const dispatch = useDispatch();
-  const news = useSelector(selectNews);
-  const [limit, setLimit] = useState(10);
+  const next = useSelector(selectNewsNext);
 
   useEffect(() => {
-    dispatch(fetchNewsStart());
+    next && dispatch(fetchNewsStart(next));
   }, [dispatch]);
 
-  const handleIncreaseLimit = () => {
-    setLimit((prevLimit) => prevLimit + 10);
-  };
-
   return (
-    <Box
-      display="flex"
-      flexDirection="column"
-      alignItems="center"
-      marginTop="2rem"
-    >
-      <Typography variant="title" gutterBottom>
-        News
-      </Typography>
-      {news.slice(0, limit).map((newsItem) => (
-        <NewsCard key={newsItem.id} newsItem={newsItem} setLimit={setLimit} />
-      ))}
-      {limit < news.length && (
-        <Button
-          variant="contained"
-          onClick={handleIncreaseLimit}
-          size="large"
-          sx={{ m: "2rem 0" }}
-        >
-          Show More
-        </Button>
-      )}
-    </Box>
+    <Routes>
+      <Route index element={<NewsPreview />} />
+      <Route path=":newsId" element={<Article />} />
+    </Routes>
   );
 };
 

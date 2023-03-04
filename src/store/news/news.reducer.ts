@@ -11,12 +11,14 @@ export type NewsState = {
   readonly news: News[];
   readonly isLoading: boolean;
   readonly error: Error | null;
+  readonly next: string | null;
 };
 
 const NEWS_INITIAL_STATE: NewsState = {
   news: [],
   isLoading: false,
   error: null,
+  next: "https://jsonplaceholder.typicode.com/posts?_page=1&_limit=10",
 };
 
 export const newsReducer = (
@@ -40,7 +42,8 @@ export const newsReducer = (
     return {
       ...state,
       isLoading: false,
-      news: action.payload,
+      news: [...state.news, ...action.payload.news],
+      next: action.payload.next,
     };
   }
   if (fetchNewsFailure.match(action)) {

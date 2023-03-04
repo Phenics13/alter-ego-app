@@ -7,10 +7,10 @@ import {
 import { News, NEWS_ACTION_TYPES } from "./news.types";
 
 type SetNews = ActionWithPayload<NEWS_ACTION_TYPES.SET_NEWS, News[]>;
-type FetchNewsStart = Action<NEWS_ACTION_TYPES.FETCH_NEWS_START>;
+type FetchNewsStart = ActionWithPayload<NEWS_ACTION_TYPES.FETCH_NEWS_START, string>;
 type FetchNewsSuccess = ActionWithPayload<
   NEWS_ACTION_TYPES.FETCH_NEWS_SUCCESS,
-  News[]
+  {news: News[], next: string | null}
 >;
 type FetchNewsFailure = ActionWithPayload<
   NEWS_ACTION_TYPES.FETCH_NEWS_FAILURE,
@@ -26,11 +26,11 @@ export const setNews = withMatcher(
 );
 
 export const fetchNewsStart = withMatcher(
-  (): FetchNewsStart => createAction(NEWS_ACTION_TYPES.FETCH_NEWS_START)
+  (next: string): FetchNewsStart => createAction(NEWS_ACTION_TYPES.FETCH_NEWS_START, next)
 );
 export const fetchNewsSuccess = withMatcher(
-  (news: News[]): FetchNewsSuccess =>
-    createAction(NEWS_ACTION_TYPES.FETCH_NEWS_SUCCESS, news)
+  (news: News[], next: string | null): FetchNewsSuccess =>
+    createAction(NEWS_ACTION_TYPES.FETCH_NEWS_SUCCESS, {news, next})
 );
 export const fetchNewsFailure = withMatcher(
   (error: Error): FetchNewsFailure =>
