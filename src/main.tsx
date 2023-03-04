@@ -60,16 +60,6 @@ const theme = createTheme({
     },
   },
   components: {
-    MuiTypography: {
-      variants: [
-        {
-          props: { variant: "body2" },
-          style: {
-            "font-family": "Lora, Roboto, sans-serif",
-          },
-        },
-      ],
-    },
     MuiButton: {
       styleOverrides: {
         root: {

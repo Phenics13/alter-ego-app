@@ -8,6 +8,7 @@ import {
   CircularProgress,
   Snackbar,
   Alert,
+  Grid,
 } from "@mui/material";
 
 import { fetchNewsStart } from "../../store/news/news.action";
@@ -29,17 +30,10 @@ const NewsPreview = () => {
     next && dispatch(fetchNewsStart(next));
   };
 
-  const [open, setOpen] = useState(false);
+  const [openSnackbar, setOpenSnackbar] = useState(false);
 
-  const handleClose = (
-    event?: React.SyntheticEvent | Event,
-    reason?: string
-  ) => {
-    if (reason === "clickaway") {
-      return;
-    }
-    setOpen(false);
-    console.log("close");
+  const handleClose = () => {
+    setOpenSnackbar(false);
   };
 
   return (
@@ -52,9 +46,15 @@ const NewsPreview = () => {
       <Typography variant="title" gutterBottom>
         News
       </Typography>
-      {news.map((newsItem) => (
-        <NewsCard key={newsItem.id} newsItem={newsItem} setOpen={setOpen} />
-      ))}
+      <Grid container spacing={2} width={{ xs: "90%", sm: "80%" }}>
+        {news.map((newsItem) => (
+          <NewsCard
+            key={newsItem.id}
+            newsItem={newsItem}
+            setOpen={setOpenSnackbar}
+          />
+        ))}
+      </Grid>
 
       {isLoading ? (
         <Box sx={{ m: "2rem 0" }}>
@@ -72,7 +72,11 @@ const NewsPreview = () => {
           </Button>
         )
       )}
-      <Snackbar open={open} autoHideDuration={2000} onClose={handleClose}>
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={2000}
+        onClose={handleClose}
+      >
         <Alert severity="success">News item deleted</Alert>
       </Snackbar>
     </Box>
