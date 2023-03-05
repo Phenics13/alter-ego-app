@@ -1,5 +1,4 @@
 import {
-  Action,
   ActionWithPayload,
   createAction,
   withMatcher,
@@ -9,7 +8,7 @@ import { News, NEWS_ACTION_TYPES } from "./news.types";
 export type SetNews = ActionWithPayload<NEWS_ACTION_TYPES.SET_NEWS, News[]>;
 export type FetchNewsStart = ActionWithPayload<
   NEWS_ACTION_TYPES.FETCH_NEWS_START,
-  string
+  string | undefined
 >;
 export type FetchNewsSuccess = ActionWithPayload<
   NEWS_ACTION_TYPES.FETCH_NEWS_SUCCESS,
@@ -29,7 +28,7 @@ export const setNews = withMatcher(
 );
 
 export const fetchNewsStart = withMatcher(
-  (next: string): FetchNewsStart =>
+  (next?: string): FetchNewsStart =>
     createAction(NEWS_ACTION_TYPES.FETCH_NEWS_START, next)
 );
 export const fetchNewsSuccess = withMatcher(

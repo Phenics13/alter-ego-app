@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
-import { fetchNewsStart } from "../../store/news/news.action";
+import { fetchNewsStart, setNews } from "../../store/news/news.action";
 
 import { Route, Routes } from "react-router-dom";
 import NewsPreview from "../../components/news-preview/news-preview.component";
@@ -10,10 +10,10 @@ import { selectNewsNext } from "../../store/news/news.selector";
 
 const News = () => {
   const dispatch = useDispatch();
-  const next = useSelector(selectNewsNext);
 
   useEffect(() => {
-    next && dispatch(fetchNewsStart(next));
+    dispatch(setNews([]));
+    dispatch(fetchNewsStart());
   }, [dispatch]);
 
   return (

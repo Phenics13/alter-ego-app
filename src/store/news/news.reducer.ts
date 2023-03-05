@@ -5,7 +5,7 @@ import {
   fetchNewsFailure,
   setNews,
 } from "./news.action";
-import { News } from "./news.types";
+import { INITIAL_NEWS_NEXT, News } from "./news.types";
 
 export type NewsState = {
   readonly news: News[];
@@ -18,7 +18,7 @@ const NEWS_INITIAL_STATE: NewsState = {
   news: [],
   isLoading: false,
   error: null,
-  next: "https://jsonplaceholder.typicode.com/posts?_page=1&_limit=10",
+  next: INITIAL_NEWS_NEXT,
 };
 
 export const newsReducer = (

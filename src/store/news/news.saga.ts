@@ -5,9 +5,9 @@ import {
   FetchNewsStart,
   fetchNewsSuccess,
 } from "./news.action";
-import { NEWS_ACTION_TYPES } from "./news.types";
+import { INITIAL_NEWS_NEXT, NEWS_ACTION_TYPES } from "./news.types";
 
-export function* fetchNewsAsync({ payload: next }: FetchNewsStart) {
+export function* fetchNewsAsync({ payload: next = INITIAL_NEWS_NEXT }: FetchNewsStart) {
   try {
     const response = yield* call(fetch, next);
     if (!response.ok) {
