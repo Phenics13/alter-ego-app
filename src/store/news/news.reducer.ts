@@ -43,7 +43,9 @@ export const newsReducer = (
       ...state,
       isLoading: false,
       news: [...state.news, ...action.payload.news],
-      next: action.payload.next,
+      next: action.payload.next
+        ? action.payload.next.replace("http", "https")
+        : action.payload.next,
     };
   }
   if (fetchNewsFailure.match(action)) {
