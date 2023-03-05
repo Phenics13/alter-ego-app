@@ -1,15 +1,25 @@
 import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import { Trans, useTranslation } from "react-i18next";
 
 import { Box, Typography, Container, Grid, Button } from "@mui/material";
 
 import Benefit from "../../components/benefit/benefit.component";
 
-import { BENEFITS_ENG } from "../../constants/benefits.data";
+export type TBenefit = {
+  id: number;
+  title: string;
+  description: string;
+};
 
 const Home = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const refBenefits = useRef<HTMLHRElement>(null);
+
+  const benefitsArray = t("benefits", {
+    returnObjects: true,
+  }) as Array<TBenefit>;
 
   const handlePreviewClick = () => {
     refBenefits.current?.scrollIntoView({ behavior: "smooth" });
@@ -40,14 +50,16 @@ const Home = () => {
               variant="h3"
               component="h2"
               gutterBottom
-              fontSize={{ xs: "2.5rem", sm: "3rem" }}
+              fontSize={{ xs: "2rem", sm: "3rem" }}
             >
-              Develop wonderful
-              <br />
-              projects with us.
+              <Trans i18nKey="development">
+                Develop wonderful
+                <br />
+                projects with us.
+              </Trans>
             </Typography>
             <Typography variant="body1" component="p">
-              We create today to use it tomorrow.
+              {t("create")}
             </Typography>
           </Box>
           <Box>
@@ -64,14 +76,14 @@ const Home = () => {
           sx={{ mt: "4rem", p: "0.5rem 4rem" }}
           onClick={handlePreviewClick}
         >
-          <Typography variant="h6">Let's go</Typography>
+          <Typography variant="h6">{t("let_go")}</Typography>
         </Button>
       </Box>
 
       <hr style={{ border: "1px solid black" }} ref={refBenefits} />
       <Grid container gap="2rem" justifyContent="center" sx={{ m: "3rem 0" }}>
-        {BENEFITS_ENG.map((benefit) => (
-          <Benefit benefit={benefit} />
+        {benefitsArray.map((benefit) => (
+          <Benefit key={benefit.id} benefit={benefit} />
         ))}
       </Grid>
 
@@ -88,7 +100,7 @@ const Home = () => {
           size="large"
           onClick={() => handleNavigate("news")}
         >
-          News
+          {t("news")}
         </Button>
         <Button
           variant="contained"
@@ -96,7 +108,7 @@ const Home = () => {
           size="large"
           onClick={() => handleNavigate("sign-in")}
         >
-          Sign In
+          {t("sign-in")}
         </Button>
       </Box>
     </Container>

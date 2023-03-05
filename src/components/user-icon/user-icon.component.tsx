@@ -1,3 +1,7 @@
+import { FC, MouseEvent, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
+
 import {
   Box,
   Tooltip,
@@ -9,8 +13,6 @@ import {
 } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
-import { FC, MouseEvent, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { setCurrentUser } from "../../store/user/user.action";
 import { selectCurrentUser } from "../../store/user/user.selector";
 
@@ -21,6 +23,7 @@ type UserIconProps = {
 const settings = ["profile", "logout"];
 
 const UserIcon: FC<UserIconProps> = ({ handleMenuClick }) => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const user = useSelector(selectCurrentUser);
 
@@ -73,9 +76,7 @@ const UserIcon: FC<UserIconProps> = ({ handleMenuClick }) => {
                 key={setting}
                 onClick={() => handleUserMenuClick(setting)}
               >
-                <Typography textAlign="center">
-                  {setting[0].toUpperCase() + setting.slice(1)}
-                </Typography>
+                <Typography textAlign="center">{t(setting)}</Typography>
               </MenuItem>
             ))}
           </Menu>
@@ -87,7 +88,7 @@ const UserIcon: FC<UserIconProps> = ({ handleMenuClick }) => {
           sx={{ borderRadius: 50 }}
           onClick={handleMenuClick("sign-in")}
         >
-          Sign In
+          {t("sign-in")}
         </Button>
       )}
     </Box>

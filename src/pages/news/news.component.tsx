@@ -1,12 +1,11 @@
 import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { Route, Routes } from "react-router-dom";
 
-import { useDispatch, useSelector } from "react-redux";
 import { fetchNewsStart, setNews } from "../../store/news/news.action";
 
-import { Route, Routes } from "react-router-dom";
 import NewsPreview from "../../components/news-preview/news-preview.component";
 import Article from "../article/article.component";
-import { selectNewsNext } from "../../store/news/news.selector";
 
 const News = () => {
   const dispatch = useDispatch();

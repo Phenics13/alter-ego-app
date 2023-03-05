@@ -1,4 +1,6 @@
 import { FC } from "react";
+import { useTranslation } from "react-i18next";
+
 import {
   Box,
   Drawer,
@@ -8,7 +10,10 @@ import {
   ListItemButton,
   ListItemText,
   Divider,
+  Button,
 } from "@mui/material";
+
+import { languages } from "../../utils/i18next/i18n";
 
 type HeaderDrawerProps = {
   handleMenuClick: (page: string) => () => void;
@@ -23,27 +28,42 @@ const HeaderDrawer: FC<HeaderDrawerProps> = ({
   pages,
   mobileOpen,
 }) => {
+  const { t, i18n } = useTranslation();
+
   const drawer = (
     <Box
       onClick={handleDrawerToggle}
-      sx={{ textAlign: "center", height: "100%" }}
+      sx={{
+        textAlign: "center",
+        height: "100%",
+        display: "flex",
+        flexDirection: "column",
+      }}
     >
       <Typography variant="h6" sx={{ my: 2 }}>
-        Menu
+        {t("menu")}
       </Typography>
       <Divider sx={{ borderBottomWidth: 2, width: "80%", margin: "0 auto" }} />
-      <List>
+      <List sx={{ flex: "1" }}>
         {pages.map((page) => (
           <ListItem key={page} disablePadding>
             <ListItemButton
               sx={{ textAlign: "center" }}
               onClick={handleMenuClick(page)}
             >
-              <ListItemText primary={page[0].toUpperCase() + page.slice(1)} />
+              <ListItemText primary={t(page)} />
             </ListItemButton>
           </ListItem>
         ))}
       </List>
+      {/* language */}
+      <Box sx={{ display: "flex", flexDirection: "column" }}>
+        {Object.keys(languages).map((lang) => (
+          <Button key={lang} onClick={() => i18n.changeLanguage(lang)}>
+            {languages[lang].nativeName}
+          </Button>
+        ))}
+      </Box>
     </Box>
   );
 

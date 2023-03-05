@@ -1,4 +1,5 @@
 import { FC, ReactElement } from "react";
+import { useTranslation } from "react-i18next";
 
 import {
   AppBar,
@@ -11,6 +12,8 @@ import {
   useScrollTrigger,
   Slide,
 } from "@mui/material";
+
+import { languages } from "../../utils/i18next/i18n";
 
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -37,6 +40,8 @@ const HeaderBar: FC<HeaderBarProps> = ({
   handleDrawerToggle,
   pages,
 }) => {
+  const { t, i18n } = useTranslation();
+
   return (
     <HideOnScroll>
       <AppBar component="nav">
@@ -102,7 +107,16 @@ const HeaderBar: FC<HeaderBarProps> = ({
             <Box sx={{ flexGrow: 1, display: { xs: "none", sm: "flex" } }}>
               {pages.map((page) => (
                 <Button key={page} onClick={handleMenuClick(page)}>
-                  {page[0].toUpperCase() + page.slice(1)}
+                  {t(page)}
+                </Button>
+              ))}
+            </Box>
+
+            {/* language */}
+            <Box sx={{ display: { xs: "none", sm: "flex" } }}>
+              {Object.keys(languages).map((lang) => (
+                <Button key={lang} onClick={() => i18n.changeLanguage(lang)}>
+                  {languages[lang].nativeName}
                 </Button>
               ))}
             </Box>

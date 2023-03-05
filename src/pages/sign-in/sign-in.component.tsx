@@ -1,10 +1,11 @@
 import { ChangeEvent, FormEvent, useState } from "react";
-
-import { Box, Button, makeStyles, TextField, Typography } from "@mui/material";
-import styled from "@emotion/styled";
-
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { useTranslation } from "react-i18next";
+
+import { Box, Button, TextField, Typography } from "@mui/material";
+import styled from "@emotion/styled";
+
 import { setCurrentUser } from "../../store/user/user.action";
 
 const Form = styled("form")({
@@ -19,6 +20,7 @@ const initialFormFields = {
 };
 
 const SignIn = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [formFields, setFormFields] = useState(initialFormFields);
@@ -30,7 +32,7 @@ const SignIn = () => {
   };
 
   const validateForm = () => {
-    const {username, password} = formFields;
+    const { username, password } = formFields;
     if (username !== "admin" || password !== "12345") {
       return false;
     } else {
@@ -47,9 +49,9 @@ const SignIn = () => {
     } else {
       setIsValid(true);
     }
-    
-    const {username} = formFields;
-    dispatch(setCurrentUser({username}));
+
+    const { username } = formFields;
+    dispatch(setCurrentUser({ username }));
 
     setFormFields(initialFormFields);
     navigate("/profile");
@@ -71,13 +73,13 @@ const SignIn = () => {
       }}
     >
       <Typography variant="h6" gutterBottom>
-        Sign In
+        {t("sign-in")}
       </Typography>
       <Form onSubmit={(e) => handleSubmit(e)}>
         <TextField
           variant="standard"
           type="text"
-          label="username"
+          label={t("username")}
           margin="normal"
           name="username"
           value={formFields.username}
@@ -86,7 +88,7 @@ const SignIn = () => {
         <TextField
           variant="standard"
           type="password"
-          label="password"
+          label={t("password")}
           margin="normal"
           name="password"
           value={formFields.password}
@@ -98,7 +100,7 @@ const SignIn = () => {
           </Typography>
         )}
         <Button variant="contained" type="submit" sx={{ mt: "1rem" }}>
-          Sign In
+          {t("sign-in")}
         </Button>
       </Form>
     </Box>

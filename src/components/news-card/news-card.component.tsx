@@ -1,16 +1,11 @@
-import {
-  Alert,
-  Box,
-  Button,
-  Grid,
-  Paper,
-  Snackbar,
-  Typography,
-} from "@mui/material";
-import { FC, useState } from "react";
+import { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { deleteNewsItem, fetchNewsStart } from "../../store/news/news.action";
+import { useTranslation } from "react-i18next";
+
+import { Box, Button, Grid, Paper, Typography } from "@mui/material";
+
+import { deleteNewsItem } from "../../store/news/news.action";
 import { selectNews } from "../../store/news/news.selector";
 import { News } from "../../store/news/news.types";
 
@@ -20,8 +15,10 @@ type NewsCardProps = {
 };
 
 const NewsCard: FC<NewsCardProps> = ({ newsItem, setOpen }) => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const news = useSelector(selectNews);
 
   const { id, title, body } = newsItem;
@@ -77,10 +74,10 @@ const NewsCard: FC<NewsCardProps> = ({ newsItem, setOpen }) => {
         </Typography>
         <Box display="flex" justifyContent="space-between">
           <Button color="info" variant="contained" onClick={handleReadMore}>
-            Read more
+            {t("read_more")}
           </Button>
           <Button variant="contained" onClick={handleDelete}>
-            Delete
+            {t("delete")}
           </Button>
         </Box>
       </Paper>

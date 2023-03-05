@@ -1,12 +1,9 @@
 import { Paper, Box, Typography, Grid } from "@mui/material";
 import { FC } from "react";
+import { TBenefit } from "../../pages/home/home.component";
 
 type BenefitProps = {
-  benefit: {
-    id: number;
-    title: string;
-    description: string;
-  };
+  benefit: TBenefit;
 };
 
 const boxNumberStyle = {

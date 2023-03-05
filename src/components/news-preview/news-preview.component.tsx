@@ -1,5 +1,6 @@
 import { MouseEvent, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 import {
   Box,
@@ -21,7 +22,9 @@ import {
 import NewsCard from "../news-card/news-card.component";
 
 const NewsPreview = () => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
+
   const news = useSelector(selectNews);
   const isLoading = useSelector(selectIsNewsLoading);
   const next = useSelector(selectNewsNext);
@@ -44,7 +47,7 @@ const NewsPreview = () => {
       marginTop="2rem"
     >
       <Typography variant="title" gutterBottom>
-        News
+        {t("news")}
       </Typography>
       <Grid container spacing={2} width={{ xs: "90%", sm: "80%" }}>
         {news.map((newsItem) => (
@@ -68,7 +71,7 @@ const NewsPreview = () => {
             size="large"
             sx={{ m: "2rem 0" }}
           >
-            Show More
+            {t("show_more")}
           </Button>
         )
       )}
@@ -77,7 +80,7 @@ const NewsPreview = () => {
         autoHideDuration={2000}
         onClose={handleClose}
       >
-        <Alert severity="success">News item deleted</Alert>
+        <Alert severity="success">{t("news_snackbar")}</Alert>
       </Snackbar>
     </Box>
   );

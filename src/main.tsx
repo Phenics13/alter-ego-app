@@ -1,6 +1,6 @@
 import { ThemeProvider, createTheme } from "@mui/material";
 import { CSSProperties } from "@mui/styled-engine";
-import React from "react";
+import React, { Suspense } from "react";
 import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
@@ -8,6 +8,8 @@ import { PersistGate } from "redux-persist/integration/react";
 import App from "./App";
 import "./index.css";
 import { persistor, store } from "./store/store";
+
+import "./utils/i18next/i18n";
 
 declare module "@mui/material/styles" {
   interface PaletteOptions {
@@ -85,7 +87,9 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
       <PersistGate loading={null} persistor={persistor}>
         <BrowserRouter>
           <ThemeProvider theme={theme}>
-            <App />
+            <Suspense fallback={<div>Loading...</div>}>
+              <App />
+            </Suspense>
           </ThemeProvider>
         </BrowserRouter>
       </PersistGate>

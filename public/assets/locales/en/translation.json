@@ -1,0 +1,59 @@
+{
+  "menu": "Menu",
+  "home": "Home",
+  "news": "News",
+
+  "profile": "Profile",
+  "profile_description": "This is your profile page",
+  "hello": "Hello, {{name}} 👋",
+
+  "sign-in": "Sign in",
+  "logout": "Logout",
+
+  "username": "username",
+  "password": "password",
+
+  "show_more": "Show more",
+  "read_more": "Read more",
+  "delete": "Delete",
+  "news_snackbar": "News item deleted",
+
+  "article": "Article #{{id}}",
+
+  "development": "Develop wonderful <1 /> projects with us.",
+  "create": "We create today to use it tomorrow.",
+  "let_go": "Let's go",
+
+  "benefits": [
+    {
+      "id": 1,
+      "title": "Professional and high-quality website",
+      "description": "Your site development service can create a professional and high-quality website for your business or organization that accurately reflects your brand and meets your specific needs and goals."
+    },
+    {
+      "id": 2,
+      "title": "Customized design",
+      "description": "Your site development service can work with you to create a custom website design that aligns with your brand and preferences, ensuring your website stands out from the crowd."
+    },
+    {
+      "id": 3,
+      "title": "User-friendly navigation",
+      "description": "Your site development service can create a user-friendly website with easy navigation, making it easy for your visitors to find what they're looking for quickly and easily."
+    },
+    {
+      "id": 4,
+      "title": "Mobile responsiveness",
+      "description": "Your site development service can ensure that your website is optimized for mobile devices, allowing users to access your site on-the-go from their smartphones and tablets."
+    },
+    {
+      "id": 5,
+      "title": "Search engine optimization (SEO)",
+      "description": "Your site development service can incorporate SEO best practices to help your website rank higher in search engine results pages, making it easier for potential customers to find you."
+    },
+    {
+      "id": 6,
+      "title": "Integration with other platforms",
+      "description": "Your site development service can integrate your website with other platforms and tools, such as social media accounts, email marketing services, and e-commerce platforms, to help you streamline your online presence and boost your online marketing efforts."
+    }
+  ]
+}
